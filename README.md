@@ -10,7 +10,7 @@ Able to detect 6 types of network attack.
 
 Configure ```config.ini``` to set SNMP host address, community string, data flow interval, and log clearing interval before running the program.
 
-To run the program, simply execute ```# python3 xgb-0.1.03r2.py``` (make sure to keep the adjacent files in the same directory in order for it to work).
+To run the program, simply execute ```# python3 xgb-0.1.03r2.py``` (make sure to keep the adjacent files in the same directory in order for it to work). You might need to adjust the last digit of the first four OIDs to match your interface index.
 
 This program outputs its verdict to a log manually accessible at ```/var/log/xgb_result.log```, and a debug log filled with somewhat useless information manually accessible at ```/var/log/xgb_debug-0.1.03.log```.
 
