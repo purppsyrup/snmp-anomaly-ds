@@ -1,5 +1,5 @@
 # SNMP-based Anomaly Detection
-Anomaly detection program based on SNMP data. Using an XGBoost model. Trained with SNMP-MIB dataset.
+Sketch of an anomaly detection program based on SNMP data. Using an XGBoost model. Trained with SNMP-MIB dataset.
 Able to detect 6 types of network attack.
 - TCP-SYN Flood
 - ICMP-ECHO Flood
