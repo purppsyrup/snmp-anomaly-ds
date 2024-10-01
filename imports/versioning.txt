@@ -1,0 +1,18 @@
+x (status) -> 0 = prototype, 1 = stable
+y (features) -> 0 = full, 1 = feat reduction
+z (feat reduction method) -> 0 = manual, 1 = manual gpt, 2 = selectfrommodel, 3 = pca, 4 = rfe
+n -> n iteration of x.y.z combo (initial value 1)
+misc -> miscellaneous description
+
+model & py -> xgb-x.y.zn(misc).ext
+scaler -> scaler-x.y.zn.ext
+scaler params -> params-x.y.zn.ext
+label encoder -> enc-x.y.zn.ext
+
+example:
+    sixth code version of a prototype with feat reduction by pca has these
+        xgb-0.1.36.ipynb
+        xgb-0.1.36.py
+        scaler-0.1.36.joblib
+        params-0.1.36.npy
+        enc-0.1.36.joblib

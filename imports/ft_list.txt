@@ -1,0 +1,21 @@
+[ifInOctets11,ifOutOctets11,ifoutDiscards11,ifInUcastPkts11,ifInNUcastPkts11,ifInDiscards11,ifOutUcastPkts11,ifOutNUcastPkts11
+tcpOutRsts,tcpInSegs,tcpOutSegs,tcpPassiveOpens,tcpRetransSegs,tcpCurrEstab,tcpEstabResets,tcp?ActiveOpens
+udpInDatagrams,udpOutDatagrams,udpInErrors,udpNoPorts,
+ipInReceives,ipInDelivers,ipOutRequests,ipOutDiscards,ipInDiscards,ipForwDatagrams,ipOutNoRoutes,ipInAddrErrors,
+icmpInMsgs,icmpInDestUnreachs,icmpOutMsgs,icmpOutDestUnreachs,icmpInEchos,icmpOutEchoReps,class]
+
+[normal,tcp-syn,udpFlood,icmp-echo,httpFlood,slowloris,slowpost,bruteForce]
+
+0.1.12
+['ifInOctets11','ifInDiscards11',
+    'tcpInSegs','tcpRetransSegs','tcpEstabResets',
+    'udpInDatagrams','udpOutDatagrams',
+    'ipInReceives','ipInDelivers','ipOutRequests', 'ipInDiscards', 'ipInAddrErrors',
+    'icmpInMsgs',]
+
+0.1.02
+['ifInOctets11','ifOutOctets11','ifInUcastPkts11','ifOutUcastPkts11',
+'tcpOutRsts','tcpInSegs','tcpOutSegs','tcpPassiveOpens','tcpRetransSegs','tcp?ActiveOpens'
+'udpInDatagrams','udpOutDatagrams','udpNoPorts',
+'ipInReceives','ipInDelivers','ipOutRequests',
+'icmpInMsgs','icmpOutMsgs','icmpOutDestUnreachs','icmpInEchos','icmpOutEchoReps',class]
