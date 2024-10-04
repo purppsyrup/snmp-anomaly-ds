@@ -9,6 +9,7 @@ from pysnmp.hlapi import *
 from joblib import load
 from datetime import datetime, timedelta
 
+# Configure loggin
 log_file = '/var/log/xgb_result.log'
 logging.basicConfig(filename=log_file, level=logging.INFO, 
                     format='%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
@@ -23,6 +24,7 @@ debug_handler.setFormatter(debug_formatter)
 debug_logger.addHandler(debug_handler)
 debug_logger.propagate = False
 
+# Load items
 xgb_model = load('xgb-0.1.03.joblib')
 scaler = load('scaler-0.1.03.joblib')
 label_encoder = load('enc-0.1.03.joblib')
@@ -31,6 +33,7 @@ scaler_params = np.load('params-0.1.03.npy', allow_pickle=True).item()
 
 previous_metrics = None
 
+# Retrieve metrics
 def get_snmp_metrics(host, community_string):
     oids = [
         '1.3.6.1.2.1.2.2.1.10.3',    # ifInOctets11
@@ -82,6 +85,7 @@ def get_snmp_metrics(host, community_string):
 
     return metrics
 
+# Read config.ini
 def read_configuration(config_file):
     config = configparser.ConfigParser()
     config.read(config_file)
@@ -93,6 +97,7 @@ def read_configuration(config_file):
 
     return host, community_string, interval, int(log_clear)
 
+# Compute diff & verdict
 def process_metrics(metrics, previous_metrics, scaler_params):
     if previous_metrics is None:
         debug_logger.debug("No previous metrics to calculate differences.")
@@ -125,6 +130,7 @@ def process_metrics(metrics, previous_metrics, scaler_params):
     
     return prediction[0], metrics_diff, metrics, prediction_time
 
+# Raw values & verdict
 def append_to_csv(metrics, prediction, csv_file):
     column_names = [
         "ifInOctets11", "ifOutOctets11", "ifInUcastPkts11", "ifOutUcastPkts11",
@@ -146,6 +152,7 @@ def append_to_csv(metrics, prediction, csv_file):
         row = metrics + [prediction]
         writer.writerow(row)
 
+# Diff val & verdict
 def append_diff_to_csv(metrics_diff, prediction, csv_file):
     column_names = [
         "ifInOctets11_diff", "ifOutOctets11_diff", "ifInUcastPkts11_diff", 
@@ -169,6 +176,7 @@ def append_diff_to_csv(metrics_diff, prediction, csv_file):
         row = list(metrics_diff) + [prediction]
         writer.writerow(row)
 
+# Resource usage & verdict
 def append_resource_usage_to_csv(resource_usage_csv, prediction_time, prediction):
     process = psutil.Process(os.getpid())
     cpu_usage = process.cpu_percent(interval=None)
@@ -186,6 +194,7 @@ def append_resource_usage_to_csv(resource_usage_csv, prediction_time, prediction
         row = [datetime.now().strftime('%Y-%m-%d %H:%M:%S'), prediction_time, cpu_usage, memory_usage, prediction]
         writer.writerow(row)
 
+# Log clearing
 def clear_old_logs(days=7):
     log_files = [log_file, debug_log_file]
     now = datetime.now()
