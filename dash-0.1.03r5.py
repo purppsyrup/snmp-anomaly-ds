@@ -47,7 +47,7 @@ def read_attack_log():
         attack_log['Prediction'] = attack_log['Prediction'].str.replace('Prediction: ', '')
         attack_log = attack_log.sort_values(by='Timestamp', ascending=False)
     except FileNotFoundError:
-        st.error("Error: File 'verdict.log' not found.")
+        st.error("Error: File '/var/log/xgb_result.log' not found.")
         return pd.DataFrame(columns=['Timestamp', 'Prediction'])
     return attack_log
 
