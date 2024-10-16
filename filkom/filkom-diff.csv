@@ -1,4 +1,4 @@
-ifInOctets11_diff,ifOutOctets11_diff,ifInUcastPkts11_diff,ifOutUcastPkts11_diff,tcpOutRsts_diff,tcpInSegs_diff,tcpOutSegs_diff,tcpPassiveOpens_diff,tcpRetransSegs_diff,tcpCurrEstab_diff,tcpActiveOpens_diff,udpInDatagrams_diff,udpOutDatagrams_diff,udpNoPorts_diff,ipInReceives_diff,ipInDelivers_diff,ipOutRequests_diff,icmpInMsgs_diff,icmpOutMsgs_diff,icmpOutDestUnreachs_diff,icmpInEchos_diff,icmpOutEchoReps_diff,target
+ifInOctets11,ifOutOctets11,ifInUcastPkts11,ifOutUcastPkts11,tcpOutRsts,tcpInSegs,tcpOutSegs,tcpPassiveOpens,tcpRetransSegs,tcpCurrEstab,tcpActiveOpens,udpInDatagrams,udpOutDatagrams,udpNoPorts,ipInReceives,ipInDelivers,ipOutRequests,icmpInMsgs,icmpOutMsgs,icmpOutDestUnreachs,icmpInEchos,icmpOutEchoReps,target
 55885576,4250169,41867,14143,0,0,0,0,0,0,0,73,69,1,217,123,151,2,65,63,3,3,normal
 98912383,6735590,75215,24591,0,0,0,0,0,0,0,74,70,1,186,134,161,2,59,57,1,1,normal
 80566143,7952638,62403,27600,0,8,6,2,0,0,0,56,50,5,136,102,110,3,22,21,3,3,normal
