@@ -58,6 +58,7 @@ def get_snmp_metrics(host, community_string):
     ]
 
     metrics = []
+
     for oid in oids:
         errorIndication, errorStatus, errorIndex, varBinds = next(
             getCmd(SnmpEngine(),
@@ -79,8 +80,10 @@ def get_snmp_metrics(host, community_string):
             metric_value = int(varBind[1])
             debug_logger.debug(f"Retrieved {varBind[0].prettyPrint()} with value {metric_value}")
             metrics.append(metric_value)
+        
+    start_time = time.time()
 
-    return metrics
+    return metrics, start_time
 
 def read_configuration(config_file):
     config = configparser.ConfigParser()
@@ -93,7 +96,7 @@ def read_configuration(config_file):
 
     return host, community_string, interval, int(log_clear)
 
-def process_metrics(metrics, previous_metrics, scaler_params):
+def process_metrics(metrics, previous_metrics, scaler_params, start_time):
     if previous_metrics is None:
         debug_logger.debug("No previous metrics to calculate differences.")
         return None, None, metrics, 0
@@ -112,8 +115,6 @@ def process_metrics(metrics, previous_metrics, scaler_params):
     debug_logger.debug(f"Scaler scale: {scale}")
     scaled_metrics = (metrics_array - mean) / scale
     debug_logger.debug(f"Scaled metrics: {scaled_metrics}")
-    
-    start_time = time.time()
 
     prediction_encoded = xgb_model.predict(scaled_metrics)
     prediction = label_encoder.inverse_transform(prediction_encoded)
@@ -210,8 +211,8 @@ def main():
     host, community_string, interval, log_clear = read_configuration(config_file)
 
     while True:
-        metrics = get_snmp_metrics(host, community_string)
-        prediction, metrics_diff, previous_metrics, prediction_time = process_metrics(metrics, previous_metrics, scaler_params)
+        metrics, start_time = get_snmp_metrics(host, community_string)
+        prediction, metrics_diff, previous_metrics, prediction_time = process_metrics(metrics, previous_metrics, scaler_params, start_time)
         
         if prediction is not None:
             logging.info(f"Prediction: {prediction}")
