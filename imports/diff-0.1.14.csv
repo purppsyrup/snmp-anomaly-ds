@@ -1,8 +1,0 @@
-ifInOctets11_diff,ifInDiscards11_diff,ifOutOctets11_diff,tcpInSegs_diff,tcpRetransSegs_diff,tcpEstabResets_diff,tcpOutSegs_diff,udpInDatagrams_diff,udpOutDatagrams_diff,udpNoPorts_diff,ipInReceives_diff,ipInDelivers_diff,ipOutRequests_diff,ipInDiscards_diff,ipInAddrErrors_diff,ipOutDiscards_diff,icmpInMsgs_diff,icmpOutMsgs_diff,icmpInDestUnreachs_diff,icmpOutDestUnreachs_diff,icmpInEchos_diff,icmpOutEchoReps_diff,class
-14135,0,11302,18,0,0,18,133,69,0,101,101,91,0,0,0,0,0,0,0,0,0,slowloris
-6841,0,23492,65,0,0,72,70,50,0,118,118,118,0,0,0,0,0,0,0,0,0,slowloris
-24132,0,17861,29,0,0,30,81,78,0,104,104,102,0,0,0,0,0,0,0,0,0,slowloris
-6865,0,10916,23,1,0,24,64,70,0,91,91,99,0,0,0,0,0,0,0,0,0,slowloris
-15905,0,17477,4804,0,0,4807,161,82,0,104,104,98,0,0,0,0,0,0,0,0,0,slowloris
-18024,0,23912,8716,2871,1,5846,121,93,0,116,116,115,0,0,0,0,0,0,0,0,0,slowpost
-8963,0,5891,9778,4942,1,4838,131,49,0,88,88,78,0,0,0,0,0,0,0,0,0,slowpost

@@ -1,5 +1,0 @@
-ifOutUcastPkts11,ifOutNUcastPkts11,tcpInSegs,tcpRetransSegs,tcpEstabResets,udpOutDatagrams,udpInErrors,udpNoPorts,ipOutDiscards,ipInDiscards,ipInAddrErrors,icmpInDestUnreachs,icmpOutDestUnreachs,class
-12364107,0,6853972,15131,4717,6731847,6650,1943,3061,0,0,16425,17591,udp-flood
-12364263,0,6854033,15131,4717,6731958,6650,1943,3061,0,0,16425,17591,udp-flood
-12364352,0,6854061,15131,4717,6732056,6650,1943,3061,0,0,16425,17591,udp-flood
-12364476,0,6854085,15131,4717,6732170,6650,1943,3061,0,0,16425,17591,udp-flood
