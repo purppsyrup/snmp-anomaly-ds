@@ -43,6 +43,7 @@ METRIC_NAMES = [
     'icmpInEchos', 'icmpOutEchoReps'
 ]
 
+# info log parsing
 def read_attack_log():
     try:
         attack_log = pd.read_csv('/var/log/xgb_result.log', delimiter=' - ', names=['Timestamp', 'Prediction'], parse_dates=['Timestamp'])
@@ -54,6 +55,7 @@ def read_attack_log():
         return pd.DataFrame(columns=['Timestamp', 'Prediction'])
     return attack_log
 
+# debug log parsing
 def read_debug_log(cycle_window_seconds=4):
     metric_values = defaultdict(dict)
     cycle_start_time = None
@@ -99,12 +101,13 @@ if "previous_attacks" not in st.session_state:
 
 attack_log = read_attack_log()
 
+# attack state
 current_attacks = list(attack_log[['Timestamp', 'Prediction']].itertuples(index=False, name=None))
-
 new_attacks = [attack for attack in current_attacks if attack not in st.session_state.previous_attacks]
 
 alert_container = st.empty()
 
+# alert and state update
 if new_attacks:
     st.session_state.previous_attacks = current_attacks
     
