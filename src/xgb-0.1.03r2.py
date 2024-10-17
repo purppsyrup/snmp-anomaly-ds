@@ -170,9 +170,9 @@ def append_diff_to_csv(metrics_diff, prediction, csv_file):
         row = list(metrics_diff) + [prediction]
         writer.writerow(row)
 
-def append_resource_usage_to_csv(resource_usage_csv, prediction_time, prediction):
+def append_resource_usage_to_csv(resource_usage_csv, prediction_time, prediction, interval):
     process = psutil.Process(os.getpid())
-    cpu_usage = process.cpu_percent(interval=None)
+    cpu_usage = process.cpu_percent(float(interval))
     memory_info = process.memory_info()
     memory_usage = memory_info.rss / (1024 * 1024)  # Convert to MB
     
@@ -219,7 +219,7 @@ def main():
             append_to_csv(metrics, prediction, csv_file)
             append_diff_to_csv(metrics_diff, prediction, diff_csv_file)
         
-        append_resource_usage_to_csv(resource_usage_csv, prediction_time, prediction)
+        append_resource_usage_to_csv(resource_usage_csv, prediction_time, prediction, interval)
         time.sleep(int(interval))
         clear_old_logs(log_clear)
 
