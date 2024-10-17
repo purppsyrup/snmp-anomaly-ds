@@ -4,6 +4,9 @@ import time
 from collections import defaultdict
 import plotly.express as px
 
+# wide mode
+st.set_page_config(layout="wide")
+
 # dict
 OID_TO_NAME = {
     'SNMPv2-SMI::mib-2.2.2.1.10.3': 'ifInOctets3',
@@ -40,6 +43,7 @@ METRIC_NAMES = [
     'icmpInEchos', 'icmpOutEchoReps'
 ]
 
+# info log parsing
 def read_attack_log():
     try:
         attack_log = pd.read_csv('/var/log/xgb_result.log', delimiter=' - ', names=['Timestamp', 'Prediction'], parse_dates=['Timestamp'])
@@ -51,6 +55,7 @@ def read_attack_log():
         return pd.DataFrame(columns=['Timestamp', 'Prediction'])
     return attack_log
 
+# debug log parsing
 def read_debug_log(cycle_window_seconds=4):
     metric_values = defaultdict(dict)
     cycle_start_time = None
@@ -91,11 +96,25 @@ def read_debug_log(cycle_window_seconds=4):
     
     return metric_values, metrics_diff
 
-attack_log = read_attack_log()
-cycle_values, metrics_diff = read_debug_log()
+if "previous_attacks" not in st.session_state:
+    st.session_state.previous_attacks = []
 
-# wide mode
-st.set_page_config(layout="wide")
+attack_log = read_attack_log()
+
+# attack state
+current_attacks = list(attack_log[['Timestamp', 'Prediction']].itertuples(index=False, name=None))
+new_attacks = [attack for attack in current_attacks if attack not in st.session_state.previous_attacks]
+
+alert_container = st.empty()
+
+# alert and state update
+if new_attacks:
+    st.session_state.previous_attacks = current_attacks
+    
+    for attack in new_attacks:
+        alert_container.warning(f'New attack detected: {attack[1]} at {attack[0]}', icon="⚠️")
+
+cycle_values, metrics_diff = read_debug_log()
 
 st.title('SNMP-based Anomaly Detection')
 
